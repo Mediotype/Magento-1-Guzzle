@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Mediotype_MagentoGuzzle>
+            <version>4.2.1</version>
+        </Mediotype_MagentoGuzzle>
+    </modules>
+    <global>
+        <helpers>
+            <guzzle>
+                <class>Mediotype_MagentoGuzzle_Helper</class>
+            </guzzle>
+        </helpers>
+        <models>
+            <guzzle>
+                <class>Mediotype_MagentoGuzzle_Model</class>
+            </guzzle>
+        </models>
+    </global>
+</config>

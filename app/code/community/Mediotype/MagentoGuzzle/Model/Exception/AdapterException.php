@@ -1,0 +1,3 @@
+<?php
+class Mediotype_MagentoGuzzle_Model_Exception_AdapterException extends Mediotype_MagentoGuzzle_Model_Exception_TransferException
+ {}
