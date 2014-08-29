@@ -2,6 +2,8 @@ Guzzle 4.21 refactored completely for Magento, the most popular PHP HTTP client 
 ================================================
 @author Joel Hart @mediotype
 
+http://www.mediotype.com
+
 I refactored the entire code base, including comments so your PHPStorm will play nice :)
 
 Guzzle is a PHP HTTP client that makes it easy to work with HTTP/1.1 and takes
@@ -15,7 +17,7 @@ $client = Mage::getModel('guzzle/client');
 $helper = Mage::helper('guzzle');
 
 $response = $client->get('http://guzzlephp.org');
-$res = $client->get('https://api.github.com/user', ['auth' =>  ['user', 'pass']]);
+$res = $client->get('https://api.github.com/user', array('auth' =>  array('user', 'pass')));
 echo $res->getStatusCode();
 // "200"
 echo $res->getHeader('content-type');
