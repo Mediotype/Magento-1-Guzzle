@@ -34,7 +34,7 @@ class Mediotype_MagentoGuzzle_Model_Message_MessageFactory implements Mediotype_
         return new Mediotype_MagentoGuzzle_Model_Message_Response($statusCode, $headers, $body, $options);
     }
 
-    public function createRequest($method, $url, array $options = [])
+    public function createRequest($method, $url, array $options = array())
     {
         // Handle the request protocol version option that needs to be
         // specified in the request constructor.
@@ -42,9 +42,8 @@ class Mediotype_MagentoGuzzle_Model_Message_MessageFactory implements Mediotype_
             $options['config']['protocol_version'] = $options['version'];
             unset($options['version']);
         }
-
-        $request = new Mediotype_MagentoGuzzle_Model_Message_Request($method, $url, [], null,
-            isset($options['config']) ? $options['config'] : []);
+        $request = new Mediotype_MagentoGuzzle_Model_Message_Request($method, $url, array(), null,
+            isset($options['config']) ? $options['config'] : array());
 
         unset($options['config']);
 
@@ -53,7 +52,7 @@ class Mediotype_MagentoGuzzle_Model_Message_MessageFactory implements Mediotype_
             !isset($options['body']) &&
             !isset($options['json'])
         ) {
-            $options['body'] = [];
+            $options['body'] = array();
         }
 
         if ($options) {
@@ -142,9 +141,9 @@ class Mediotype_MagentoGuzzle_Model_Message_MessageFactory implements Mediotype_
         array $options = array()
     ) {
         // Values specified in the config map are passed to request options
-        static $configMap = ['connect_timeout' => 1, 'timeout' => 1,
+        static $configMap = array('connect_timeout' => 1, 'timeout' => 1,
             'verify' => 1, 'ssl_key' => 1, 'cert' => 1, 'proxy' => 1,
-            'debug' => 1, 'save_to' => 1, 'stream' => 1, 'expect' => 1];
+            'debug' => 1, 'save_to' => 1, 'stream' => 1, 'expect' => 1);
 
         // Take the class of the instance, not the parent
         $selfClass = get_class($this);
@@ -156,7 +155,6 @@ class Mediotype_MagentoGuzzle_Model_Message_MessageFactory implements Mediotype_
 
         // Take class methods of this particular instance
         $methods = self::$classMethods[$selfClass];
-
         // Iterate over each key value pair and attempt to apply a config using
         // double dispatch.
         $config = $request->getConfig();

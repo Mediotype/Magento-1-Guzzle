@@ -1,6 +1,6 @@
 Guzzle 4.21 refactored completely for Magento, the most popular PHP HTTP client and webservice framework
 ================================================
-@author Joel Hart @mediotype
+@author Joel  @mediotype
 
 http://www.mediotype.com
 

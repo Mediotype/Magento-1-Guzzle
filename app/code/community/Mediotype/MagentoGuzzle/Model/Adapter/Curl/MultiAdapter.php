@@ -102,7 +102,7 @@ class Mediotype_MagentoGuzzle_Model_Adapter_Curl_MultiAdapter implements Medioty
             $transactions
         );
 
-        foreach (new \LimitIterator($transactions, 0, $parallel) as $trans) {
+        foreach (new LimitIterator($transactions, 0, $parallel) as $trans) {
             $this->addHandle($trans, $context);
         }
 
@@ -124,11 +124,9 @@ class Mediotype_MagentoGuzzle_Model_Adapter_Curl_MultiAdapter implements Medioty
             if ($mrc != CURLM_OK) {
                 self::throwMultiError($mrc);
             }
-
             $this->processMessages($context);
-
             if ($active &&
-                curl_multi_select($multi, $this->selectTimeout) === -1
+                curl_multi_select($multi, $this->selectTimeout)  === -1
             ) {
                 // Perform a usleep if a select returns -1.
                 // See: https://bugs.php.net/bug.php?id=61141
@@ -164,7 +162,7 @@ class Mediotype_MagentoGuzzle_Model_Adapter_Curl_MultiAdapter implements Medioty
         try {
             if (!$this->isCurlException($transaction, $curl, $context, $info) &&
                 $this->validateResponseWasSet($transaction, $context)
-            ) {
+            ) {  // var_dump(array($transaction,$info)); die();
                 Mediotype_MagentoGuzzle_Model_Event_RequestEvents::emitComplete($transaction, $info);
             }
         } catch (Exception $e) {
@@ -222,7 +220,7 @@ class Mediotype_MagentoGuzzle_Model_Adapter_Curl_MultiAdapter implements Medioty
                 ),
                 $stats
             );
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->throwException($e, $context);
         }
 

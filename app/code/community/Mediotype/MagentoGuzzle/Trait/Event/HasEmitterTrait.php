@@ -2,7 +2,7 @@
 /**
  * Trait that implements the methods of HasEmitterInterface
  */
-trait Mediotype_MagentoGuzzle_Trait_HasEmitterTrait
+trait Mediotype_MagentoGuzzle_Trait_Event_HasEmitterTrait
 {
     /** @var EmitterInterface */
     private $emitter;

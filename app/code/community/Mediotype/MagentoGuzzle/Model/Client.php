@@ -4,7 +4,7 @@
  */
 class Mediotype_MagentoGuzzle_Model_Client implements Mediotype_MagentoGuzzle_Model_ClientInterface
 {
-    use Mediotype_MagentoGuzzle_Trait_HasEmitterTrait;
+    use Mediotype_MagentoGuzzle_Trait_Event_HasEmitterTrait;
 
     const DEFAULT_CONCURRENCY = 25;
 
@@ -57,7 +57,7 @@ class Mediotype_MagentoGuzzle_Model_Client implements Mediotype_MagentoGuzzle_Mo
     /** @var $helper Mediotype_MagentoGuzzle_Helper_Data */
     protected $helper;
 
-    public function __construct(array $config = array())
+    public function __construct(Array $config = array())
     {
         $this->helper = Mage::helper('guzzle');
         $this->configureBaseUrl($config);
@@ -140,6 +140,11 @@ class Mediotype_MagentoGuzzle_Model_Client implements Mediotype_MagentoGuzzle_Mo
         return $request;
     }
 
+    /**
+     * @param null $url
+     * @param array $options
+     * @return Mediotype_MagentoGuzzle_Model_Message_RequestInterface|Mediotype_MagentoGuzzle_Model_Message_ResponseInterface
+     */
     public function get($url = null, $options = array())
     {
         return $this->send($this->createRequest('GET', $url, $options));
@@ -182,10 +187,10 @@ class Mediotype_MagentoGuzzle_Model_Client implements Mediotype_MagentoGuzzle_Mo
             if ($response = $this->adapter->send($transaction)) {
                 return $response;
             }
-            throw new \LogicException('No response was associated with the transaction');
+            throw new LogicException('No response was associated with the transaction');
         } catch (Mediotype_MagentoGuzzle_Model_Exception_RequestException $e) {
             throw $e;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             // Wrap exceptions in a RequestException to adhere to the interface
             throw new Mediotype_MagentoGuzzle_Model_Exception_RequestException($e->getMessage(), $request, null, $e);
         }
@@ -302,10 +307,10 @@ class Mediotype_MagentoGuzzle_Model_Client implements Mediotype_MagentoGuzzle_Mo
     private function configureBaseUrl(&$config)
     {
         if (!isset($config['base_url'])) {
-            $this->baseUrl = new Url('', '');
+            $this->baseUrl = new Mediotype_MagentoGuzzle_Model_Url('', '');
         } elseif (is_array($config['base_url'])) {
             $this->baseUrl = Mediotype_MagentoGuzzle_Model_Url::fromString(
-                \GuzzleHttp\uri_template(
+                Mage::helper('guzzle')->uri_template(
                     $config['base_url'][0],
                     $config['base_url'][1]
                 )
@@ -329,12 +334,12 @@ class Mediotype_MagentoGuzzle_Model_Client implements Mediotype_MagentoGuzzle_Mo
 
         // Add the default user-agent header
         if (!isset($this->defaults['headers'])) {
-            $this->defaults['headers'] = [
-                'User-Agent' => static::getDefaultUserAgent()
-            ];
+            $this->defaults['headers'] = array(
+                'User-Agent' => self::getDefaultUserAgent()
+            );
         } elseif (!isset(array_change_key_case($this->defaults['headers'])['user-agent'])) {
             // Add the User-Agent header if one was not already set
-            $this->defaults['headers']['User-Agent'] = static::getDefaultUserAgent();
+            $this->defaults['headers']['User-Agent'] = self::getDefaultUserAgent();
         }
     }
 

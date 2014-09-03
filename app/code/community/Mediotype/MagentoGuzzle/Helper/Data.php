@@ -148,14 +148,14 @@ class Mediotype_MagentoGuzzle_Helper_Data extends Mage_Core_Helper_Abstract{
         // hash.
         $options = Mediotype_MagentoGuzzle_Model_Event_RequestEvents::convertEventArray(
             $options,
-            ['complete', 'error'],
-            [
+            array('complete', 'error'),
+            array(
                 'priority' => Mediotype_MagentoGuzzle_Model_Event_RequestEvents::EARLY,
                 'once' => true,
                 'fn' => function ($e) use ($hash) {
                         $hash[$e->getRequest()] = $e;
                     }
-            ]
+            )
         );
 
         // Send the requests in parallel and aggregate the results.
@@ -259,8 +259,8 @@ class Mediotype_MagentoGuzzle_Helper_Data extends Mage_Core_Helper_Abstract{
      */
     function uri_template($template, array $variables)
     {
-        if (function_exists('\\uri_template')) {
-            return Mediotype_MagentoGuzzle_Model_UriTemplate($template, $variables);
+        if (function_exists('uri_template')) {
+            return new Mediotype_MagentoGuzzle_Model_UriTemplate($template, $variables);
         }
 
         static $uriTemplate;
@@ -316,7 +316,7 @@ class Mediotype_MagentoGuzzle_Helper_Data extends Mage_Core_Helper_Abstract{
     function deprecation_proxy($object, $name, $arguments, $map)
     {
         if (!isset($map[$name])) {
-            throw new \BadMethodCallException('Unknown method, ' . $name);
+            throw new BadMethodCallException('Unknown method, ' . $name);
         }
 
         $message = sprintf('%s is deprecated and will be removed in a future '
@@ -328,7 +328,7 @@ class Mediotype_MagentoGuzzle_Helper_Data extends Mage_Core_Helper_Abstract{
 
         trigger_error($message, E_USER_DEPRECATED);
 
-        return call_user_func_array([$object, $map[$name]], $arguments);
+        return call_user_func_array(array($object, $map[$name]), $arguments);
     }
 
 }

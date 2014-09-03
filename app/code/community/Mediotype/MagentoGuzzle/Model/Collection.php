@@ -13,7 +13,7 @@ class Mediotype_MagentoGuzzle_Model_Collection implements
     /**
      * @param array $data Associative array of data to set
      */
-    public function __construct(array $data = araay())
+    public function __construct(array $data = array())
     {
         $this->data = $data;
     }
@@ -27,7 +27,7 @@ class Mediotype_MagentoGuzzle_Model_Collection implements
      * @param array $required Required parameter names
      *
      * @return Mediotype_MagentoGuzzle_Model_Collection
-     * @throws \InvalidArgumentException if a parameter is missing
+     * @throws InvalidArgumentException if a parameter is missing
      */
     public static function fromConfig(
         array $config = array(),
@@ -227,7 +227,7 @@ class Mediotype_MagentoGuzzle_Model_Collection implements
      */
     public function map(callable $closure, array $context = [])
     {
-        $collection = new static();
+        $collection = new self();
         foreach ($this as $key => $value) {
             $collection[$key] = $closure($key, $value, $context);
         }
@@ -250,7 +250,7 @@ class Mediotype_MagentoGuzzle_Model_Collection implements
      */
     public function filter(callable $closure)
     {
-        $collection = new static();
+        $collection = new self();
         foreach ($this->data as $key => $value) {
             if ($closure($key, $value)) {
                 $collection[$key] = $value;

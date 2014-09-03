@@ -71,7 +71,7 @@ abstract class Mediotype_MagentoGuzzle_Model_Event_AbstractTransferEvent extends
     /**
      * Intercept the request and associate a response
      *
-     * @param Mediotype_MagentoGuzzle_Model_Message_RequestInterface $response Response to set
+     * @param Mediotype_MagentoGuzzle_Model_Message_ResponseInterface $response Response to set
      */
-    abstract public function intercept(Mediotype_MagentoGuzzle_Model_Message_RequestInterface $response);
+    abstract public function intercept(Mediotype_MagentoGuzzle_Model_Message_ResponseInterface $response);
 }

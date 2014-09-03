@@ -4,7 +4,7 @@
  */
 class Mediotype_MagentoGuzzle_Model_Message_Request extends Mediotype_MagentoGuzzle_Model_Message_AbstractMessage implements Mediotype_MagentoGuzzle_Model_Message_RequestInterface
 {
-    use Mediotype_MagentoGuzzle_Trait_HasEmitterTrait;
+    use Mediotype_MagentoGuzzle_Trait_Event_HasEmitterTrait;
 
     /** @var Mediotype_MagentoGuzzle_Model_Url HTTP Url */
     private $url;
