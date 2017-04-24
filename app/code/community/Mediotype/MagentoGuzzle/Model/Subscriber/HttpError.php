@@ -15,7 +15,7 @@ class Mediotype_MagentoGuzzle_Model_Subscriber_HttpError implements Mediotype_Ma
      * @param Mediotype_MagentoGuzzle_Model_Event_CompleteEvent $event Emitted event
      * @throws Mediotype_MagentoGuzzle_Model_Exception_RequestException
      */
-    public function onComplete(Mediotype_MagentoGuzzle_Model_Event_RequestEvents $event)
+    public function onComplete(Mediotype_MagentoGuzzle_Model_Event_CompleteEvent $event)
     {
         $code = (string) $event->getResponse()->getStatusCode();
         // Throw an exception for an unsuccessful response
