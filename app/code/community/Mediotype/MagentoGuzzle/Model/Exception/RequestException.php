@@ -50,10 +50,10 @@ class Mediotype_MagentoGuzzle_Model_Exception_RequestException extends Mediotype
         $level = $response->getStatusCode()[0];
         if ($level == '4') {
             $label = 'Client error response';
-            $className = __NAMESPACE__ . '\\ClientException';
+            $className = 'Mediotype_MagentoGuzzle_Model_Exception_ClientException';
         } elseif ($level == '5') {
             $label = 'Server error response';
-            $className = __NAMESPACE__ . '\\ServerException';
+            $className = 'Mediotype_MagentoGuzzle_Model_Exception_ServerException';
         } else {
             $label = 'Unsuccessful response';
             $className = __CLASS__;
